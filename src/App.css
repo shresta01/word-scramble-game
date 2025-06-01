@@ -1,38 +1,136 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Center the game */
+body {
+  font-family: "Arial", sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #2980b9, #2c3e50);
+  transition: background 0.5s ease-in-out;
+}
+
+/* Game box styling */
+.game-container {
+  width: 380px;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.4s ease-in-out, background 0.4s ease;
+}
+
+.game-container:hover {
+  transform: scale(1.05);
+  background: #f0f0f0;
+}
+
+/* Scrambled word (guessing slots) */
+.scrambled-word {
+  font-size: 26px;
+  font-weight: bold;
+  color: #2980b9;
+  letter-spacing: 4px;
+  animation: fadeIn 0.6s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hangman drawing setup */
+.hangman {
+  width: 140px;
+  height: 180px;
+  position: relative;
+  margin: 20px auto;
+}
+
+.base, .stand, .rope, .head, .body, .legs {
+  position: absolute;
+  display: none;
+  transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.show {
+  display: block;
+}
+
+/* Drawing Hangman parts */
+.base { width: 70px; height: 10px; background: black; bottom: 0; left: 35px; }
+.stand { width: 10px; height: 130px; background: black; bottom: 10px; left: 60px; }
+.rope { width: 8px; height: 20px; background: black; top: 0; left: 60px; }
+.head { width: 30px; height: 30px; border-radius: 50%; background: black; top: 25px; left: 45px; }
+.body { width: 10px; height: 60px; background: black; top: 60px; left: 60px; }
+.legs { width: 50px; height: 10px; background: black; top: 120px; left: 35px; }
+
+/* Input field styling */
+input {
+  width: 120px; /* 🔥 Increased width */
+  padding: 12px;
+  font-size: 18px;
+  border: 2px solid #2980b9;
+  border-radius: 6px;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.3s ease-in-out;
+}
+
+
+input:focus {
+  border-color: #1f618d;
+}
+
+/* Button styles */
+button {
+  background: #2980b9;
   color: white;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 8px;
+  font-size: 18px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background: #1f618d;
+  transform: scale(1.1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Attempts left indicator */
+.attempts {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: #1f618d;
+  padding: 6px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background 0.4s ease-in-out;
+.score {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background: #1f618d;
+  padding: 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 10px;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.wrong-guess {
+  animation: shake 0.3s ease-in-out;
+}
+
 }
